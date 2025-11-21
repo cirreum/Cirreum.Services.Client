@@ -11,7 +11,15 @@ sealed class NotImplementedFileSystem : IFileSystem {
 		throw new NotImplementedException();
 	}
 
+	Task IFileSystem.CopyDirectoryAsync(string sourceDirName, string destDirName, bool copySubDirs, bool overwrite, CancellationToken cancellationToken) {
+		throw new NotImplementedException();
+	}
+
 	void IFileSystem.CopyFile(string sourceFileName, string destFileName, bool overwrite) {
+		throw new NotImplementedException();
+	}
+
+	Task IFileSystem.CopyFileAsync(string sourceFileName, string destFileName, bool overwrite, CancellationToken cancellationToken) {
 		throw new NotImplementedException();
 	}
 
@@ -19,7 +27,15 @@ sealed class NotImplementedFileSystem : IFileSystem {
 		throw new NotImplementedException();
 	}
 
+	Task IFileSystem.DeleteChildDirectoriesAsync(string rootPath, CancellationToken cancellationToken) {
+		throw new NotImplementedException();
+	}
+
 	void IFileSystem.DeleteDirectory(string path, bool recursive) {
+		throw new NotImplementedException();
+	}
+
+	Task IFileSystem.DeleteDirectoryAsync(string path, bool recursive, CancellationToken cancellationToken) {
 		throw new NotImplementedException();
 	}
 
@@ -27,7 +43,15 @@ sealed class NotImplementedFileSystem : IFileSystem {
 		throw new NotImplementedException();
 	}
 
+	Task IFileSystem.DeleteFileAsync(string path, CancellationToken cancellationToken) {
+		throw new NotImplementedException();
+	}
+
 	void IFileSystem.DeleteFileWithRetry(string path) {
+		throw new NotImplementedException();
+	}
+
+	Task IFileSystem.DeleteFileWithRetryAsync(string path, CancellationToken cancellationToken) {
 		throw new NotImplementedException();
 	}
 
@@ -43,6 +67,10 @@ sealed class NotImplementedFileSystem : IFileSystem {
 		throw new NotImplementedException();
 	}
 
+	Task IFileSystem.ExtractZipFileAsync(string source, string destination, bool overwriteFiles, CancellationToken cancellationToken) {
+		throw new NotImplementedException();
+	}
+
 	bool IFileSystem.FileExists(string path) {
 		throw new NotImplementedException();
 	}
@@ -55,7 +83,15 @@ sealed class NotImplementedFileSystem : IFileSystem {
 		throw new NotImplementedException();
 	}
 
+	Task IFileSystem.MoveDirectoryAsync(string sourceDirName, string destDirName, CancellationToken cancellationToken) {
+		throw new NotImplementedException();
+	}
+
 	void IFileSystem.MoveFile(string sourceFileName, string destFileName, bool overwrite) {
+		throw new NotImplementedException();
+	}
+
+	Task IFileSystem.MoveFileAsync(string sourceFileName, string destFileName, bool overwrite, CancellationToken cancellationToken) {
 		throw new NotImplementedException();
 	}
 
@@ -71,6 +107,18 @@ sealed class NotImplementedFileSystem : IFileSystem {
 		throw new NotImplementedException();
 	}
 
+	IAsyncEnumerable<string> IFileSystem.QueryDirectoriesAsync(string[] paths, bool includeChildDirectories, string searchPattern, Func<string, bool>? predicate, int take, CancellationToken cancellationToken) {
+		throw new NotImplementedException();
+	}
+
+	IAsyncEnumerable<string> IFileSystem.QueryDirectoriesAsync(string path, bool includeChildDirectories, string searchPattern, Func<string, bool>? predicate, int take, CancellationToken cancellationToken) {
+		throw new NotImplementedException();
+	}
+
+	IAsyncEnumerable<string> IFileSystem.QueryDirectoriesAsync(string path, bool includeChildDirectories, IEnumerable<string> searchPatterns, Func<string, bool>? predicate, int take, CancellationToken cancellationToken) {
+		throw new NotImplementedException();
+	}
+
 	IEnumerable<string> IFileSystem.QueryFiles(string[] paths, bool includeChildDirectories, string searchPattern, Func<string, bool>? predicate, int take) {
 		throw new NotImplementedException();
 	}
@@ -80,6 +128,18 @@ sealed class NotImplementedFileSystem : IFileSystem {
 	}
 
 	IEnumerable<string> IFileSystem.QueryFiles(string path, bool includeChildDirectories, IEnumerable<string> searchPatterns, Func<string, bool>? predicate, int take) {
+		throw new NotImplementedException();
+	}
+
+	IAsyncEnumerable<string> IFileSystem.QueryFilesAsync(string[] paths, bool includeChildDirectories, string searchPattern, Func<string, bool>? predicate, int take, CancellationToken cancellationToken) {
+		throw new NotImplementedException();
+	}
+
+	IAsyncEnumerable<string> IFileSystem.QueryFilesAsync(string path, bool includeChildDirectories, string searchPattern, Func<string, bool>? predicate, int take, CancellationToken cancellationToken) {
+		throw new NotImplementedException();
+	}
+
+	IAsyncEnumerable<string> IFileSystem.QueryFilesAsync(string path, bool includeChildDirectories, IEnumerable<string> searchPatterns, Func<string, bool>? predicate, int take, CancellationToken cancellationToken) {
 		throw new NotImplementedException();
 	}
 
