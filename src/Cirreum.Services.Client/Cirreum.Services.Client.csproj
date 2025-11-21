@@ -33,5 +33,5 @@
 	<ItemGroup>
 		<Content Update="tsconfig.json" CopyToOutputDirectory="Never" Pack="false" />
 	</ItemGroup>
-
+	
 </Project>

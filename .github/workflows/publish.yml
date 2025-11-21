@@ -39,7 +39,7 @@ jobs:
       run: dotnet build Cirreum.Services.Client.slnx --configuration Release --no-restore -p:Version=${{ steps.get_version.outputs.VERSION }}
     
     - name: Pack
-      run: dotnet pack Cirreum.Services.Client.slnx --configuration Release --no-build -p:Version=${{ steps.get_version.outputs.VERSION }} -p:PackageVersion=${{ steps.get_version.outputs.VERSION }} --output ./artifacts
+      run: dotnet pack Cirreum.Services.Client.slnx --configuration Release -p:Version=${{ steps.get_version.outputs.VERSION }} -p:PackageVersion=${{ steps.get_version.outputs.VERSION }} --output ./artifacts
     
     - name: NuGet login (OIDC -> temp API key)
       uses: NuGet/login@v1
