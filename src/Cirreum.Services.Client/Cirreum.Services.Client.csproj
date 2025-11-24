@@ -18,7 +18,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Cirreum.Core" Version="1.0.15" />
+		<PackageReference Include="Cirreum.Core" Version="1.0.16" />
 		<PackageReference Include="Cirreum.Startup" Version="1.0.103" />
 		<PackageReference Include="Cirreum.Storage.Browser" Version="1.0.103" />
 	</ItemGroup>
@@ -37,10 +37,10 @@
 	<Target Name="DiagnosePackContent" BeforeTargets="GenerateNuspec">
 		<Message Importance="high" Text="========== DIAGNOSING PACK CONTENT ==========" />
 		<Message Importance="high" Text="Content items:" />
-		<Message Importance="high" Text="  %(Content.Identity) -> PackagePath=%(Content.PackagePath), Pack=%(Content.Pack)" />
+		<Message Importance="high" Text="  %(Content.Identity) -&gt; PackagePath=%(Content.PackagePath), Pack=%(Content.Pack)" />
 		<Message Importance="high" Text="----------------------------------------" />
 		<Message Importance="high" Text="ContentWithTargetPath items:" />
-		<Message Importance="high" Text="  %(ContentWithTargetPath.Identity) -> TargetPath=%(ContentWithTargetPath.TargetPath)" />
+		<Message Importance="high" Text="  %(ContentWithTargetPath.Identity) -&gt; TargetPath=%(ContentWithTargetPath.TargetPath)" />
 		<Message Importance="high" Text="============================================" />
 	</Target>
 
