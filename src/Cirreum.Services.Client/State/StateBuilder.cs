@@ -1,23 +1,28 @@
 ﻿namespace Cirreum.State;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 sealed class StateBuilder(
 	IServiceCollection services
-) : IStateBuilder {
+) : IStateBuilder,
+	IStateBuilderWithDataStores {
+
+	// internal hook just for this assembly
+	IServiceCollection IStateBuilderWithDataStores.Services => services;
 
 	/// <inheritdoc/>
 	public IStateBuilder RegisterState<TInterface, TImplementation>()
 		where TInterface : class, IApplicationState
 		where TImplementation : class, TInterface {
-		services.AddScoped<TInterface, TImplementation>();
+		services.TryAddScoped<TInterface, TImplementation>();
 		return this;
 	}
 
 	/// <inheritdoc/>
 	public IStateBuilder RegisterState<TImplementation>()
 		where TImplementation : class, IApplicationState {
-		services.AddScoped<TImplementation>();
+		services.TryAddScoped<TImplementation>();
 		return this;
 	}
 
