@@ -1,4 +1,4 @@
-﻿namespace Cirreum.State.DataStores;
+﻿namespace Cirreum.State;
 
 /// <summary>
 /// The default data store initialization policy that allows immediate initialization.
@@ -10,7 +10,7 @@
 /// </para>
 /// <para>
 /// For applications that require conditions to be met before initialization (such as
-/// user authentication), implement a custom <see cref="IDataStoreInitializationPolicy"/>.
+/// user authentication), implement a custom <see cref="IStartupGate"/>.
 /// </para>
 /// </remarks>
 /// <example>
@@ -30,11 +30,11 @@
 /// });
 /// </code>
 /// </example>
-/// <seealso cref="IDataStoreInitializationPolicy"/>
-public sealed class DefaultDataStoreInitializationPolicy : IDataStoreInitializationPolicy {
+/// <seealso cref="IStartupGate"/>
+public sealed class ImmediateStartupGate : IStartupGate {
 
 	/// <inheritdoc />
-	public IDisposable? OnReadyToInitialize(Func<CancellationToken, Task> callback) {
+	public IDisposable? WhenReady(Func<CancellationToken, Task> callback) {
 		var cts = new CancellationTokenSource();
 		_ = callback(cts.Token);
 		return cts;

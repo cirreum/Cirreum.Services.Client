@@ -1,7 +1,7 @@
-﻿namespace Cirreum.State.DataStores;
+﻿namespace Cirreum.State;
 
 /// <summary>
-/// Default implementation of <see cref="IDataStoreInitializationState"/> that tracks
+/// Default implementation of <see cref="IInitializationState"/> that tracks
 /// data store initialization progress during application startup.
 /// </summary>
 /// <remarks>
@@ -11,12 +11,12 @@
 /// to enable reactive UI updates.
 /// </para>
 /// </remarks>
-public class DataStoreInitializationState(
+public class InitializationState(
 	IStateManager stateManager
-) : ScopedNotificationState, IDataStoreInitializationState {
+) : ScopedNotificationState, IInitializationState {
 
 	private int _taskCount;
-	private readonly List<DataStoreInitializationError> _errors = [];
+	private readonly List<InitializationError> _errors = [];
 
 	/// <inheritdoc />
 	public bool IsInitializing => this._taskCount > 0;
@@ -52,7 +52,7 @@ public class DataStoreInitializationState(
 	public int GetTaskCount() => this._taskCount;
 
 	/// <inheritdoc />
-	public IReadOnlyList<DataStoreInitializationError> Errors => this._errors.AsReadOnly();
+	public IReadOnlyList<InitializationError> Errors => this._errors.AsReadOnly();
 
 	/// <inheritdoc />
 	public bool HasErrors => this._errors.Count > 0;
@@ -62,7 +62,7 @@ public class DataStoreInitializationState(
 
 	/// <inheritdoc />
 	public void LogError(string storeName, Exception exception) {
-		this._errors.Add(DataStoreInitializationError.FromException(storeName, exception));
+		this._errors.Add(InitializationError.FromException(storeName, exception));
 		this.NotifyStateChanged();
 	}
 
@@ -74,7 +74,7 @@ public class DataStoreInitializationState(
 
 	/// <inheritdoc />
 	protected override void OnStateHasChanged() {
-		stateManager.NotifySubscribers<IDataStoreInitializationState>(this);
+		stateManager.NotifySubscribers<IInitializationState>(this);
 	}
 
 }

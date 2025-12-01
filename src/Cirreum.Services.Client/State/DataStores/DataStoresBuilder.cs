@@ -1,5 +1,6 @@
 ﻿namespace Cirreum.State.DataStores;
 
+using Cirreum.State;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -28,10 +29,10 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 ///         .AddStore&lt;IProductsStore, ProductsStore&gt;();
 /// });
 /// 
-/// // With a custom initialization policy
+/// // With a custom startup gate
 /// services.AddClientState(state => {
 ///     state.AddDataStores()
-///         .WithAutoInitialization&lt;AuthenticatedInitializationPolicy&gt;()
+///         .WithAutoInitialization&lt;AuthenticatedStartupGate&gt;()
 ///         .AddStore&lt;IEventsStore, EventsStore&gt;();
 /// });
 /// 
@@ -44,7 +45,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 /// </example>
 /// <seealso cref="IDataStore"/>
 /// <seealso cref="IInitializableStore"/>
-/// <seealso cref="IDataStoreInitializationPolicy"/>
+/// <seealso cref="IStartupGate"/>
 public class DataStoresBuilder {
 
 	private readonly IServiceCollection _services;
@@ -57,72 +58,68 @@ public class DataStoresBuilder {
 
 	/// <summary>
 	/// Enables automatic initialization of data stores during application startup
-	/// using the <see cref="DefaultDataStoreInitializationPolicy"/>.
+	/// using the <see cref="ImmediateStartupGate"/>.
 	/// </summary>
 	/// <returns>The builder for method chaining.</returns>
 	/// <remarks>
 	/// <para>
 	/// When enabled, all registered stores implementing <see cref="IInitializableStore"/>
 	/// are automatically loaded during application startup. The initialization integrates
-	/// with <see cref="IDataStoreInitializationState"/> to provide progress updates
+	/// with <see cref="IInitializationState"/> to provide progress updates
 	/// for splash screens or loading indicators.
 	/// </para>
 	/// <para>
-	/// The default policy initializes stores immediately when the application starts.
+	/// The default gate opens immediately when the application starts.
 	/// For applications requiring preconditions (such as user authentication), use
-	/// <see cref="WithAutoInitialization{TPolicy}"/> with a custom policy.
+	/// <see cref="WithAutoInitialization{TGate}"/> with a custom gate.
 	/// </para>
 	/// </remarks>
-	/// <seealso cref="WithAutoInitialization{TPolicy}"/>
-	/// <seealso cref="DefaultDataStoreInitializationPolicy"/>
+	/// <seealso cref="WithAutoInitialization{TGate}"/>
+	/// <seealso cref="ImmediateStartupGate"/>
 	public DataStoresBuilder WithAutoInitialization() {
-		return this.WithAutoInitialization<DefaultDataStoreInitializationPolicy>();
+		return this.WithAutoInitialization<ImmediateStartupGate>();
 	}
 
 	/// <summary>
 	/// Enables automatic initialization of data stores during application startup
-	/// using a custom initialization policy.
+	/// using a custom startup gate.
 	/// </summary>
-	/// <typeparam name="TPolicy">
-	/// The type of <see cref="IDataStoreInitializationPolicy"/> that controls
+	/// <typeparam name="TGate">
+	/// The type of <see cref="IStartupGate"/> that controls
 	/// when initialization can proceed.
 	/// </typeparam>
 	/// <returns>The builder for method chaining.</returns>
 	/// <remarks>
 	/// <para>
-	/// Use this overload to provide a custom policy that controls when data store
+	/// Use this overload to provide a custom gate that controls when data store
 	/// initialization should occur. Common scenarios include waiting for user
 	/// authentication before loading protected data.
 	/// </para>
 	/// </remarks>
 	/// <example>
 	/// <code>
-	/// public class AuthenticatedInitializationPolicy(
+	/// public class AuthenticatedStartupGate(
 	///     IUserState userState
-	/// ) : IDataStoreInitializationPolicy {
+	/// ) : IStartupGate {
 	///
-	///     public Task&lt;bool&gt; CanInitializeAsync() 
-	///         => Task.FromResult(userState.IsAuthenticated);
-	///
-	///     public IDisposable? OnReadyToInitialize(Func&lt;Task&gt; callback) {
+	///     public IDisposable? WhenReady(Func&lt;CancellationToken, Task&gt; callback) {
 	///         if (userState.IsAuthenticated) {
-	///             _ = callback();
+	///             _ = callback(CancellationToken.None);
 	///             return null;
 	///         }
 	///         return userState.Subscribe(state => {
 	///             if (state.IsAuthenticated) {
-	///                 _ = callback();
+	///                 _ = callback(CancellationToken.None);
 	///             }
 	///         });
 	///     }
 	/// }
 	/// </code>
 	/// </example>
-	/// <seealso cref="IDataStoreInitializationPolicy"/>
-	public DataStoresBuilder WithAutoInitialization<TPolicy>()
-		where TPolicy : class, IDataStoreInitializationPolicy {
-		this._services.TryAddScoped<IDataStoreInitializationState, DataStoreInitializationState>();
-		this._services.TryAddTransient<IDataStoreInitializationPolicy, TPolicy>();
+	/// <seealso cref="IStartupGate"/>
+	public DataStoresBuilder WithAutoInitialization<TGate>()
+		where TGate : class, IStartupGate {
+		this._services.TryAddTransient<IStartupGate, TGate>();
 		return this;
 	}
 

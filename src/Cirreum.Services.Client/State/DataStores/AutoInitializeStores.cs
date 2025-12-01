@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 /// </summary>
 /// <remarks>
 /// <para>
-/// This task is automatically ran during application startup based on the configured <see cref="IDataStoreInitializationPolicy"/>.
+/// This task is automatically ran during application startup based on the configured <see cref="IStartupGate"/>.
 /// </para>
 /// <para>
 /// Stores are initialized in order by their <see cref="IInitializableStore.Order"/> property.
@@ -17,11 +17,11 @@ using Microsoft.Extensions.Logging;
 /// other stores from initializing.
 /// </para>
 /// </remarks>
-public class DataStoreInitializerTask(
+public class AutoInitializeStores(
 	IEnumerable<IInitializableStore> stores,
-	IDataStoreInitializationState initState,
-	IDataStoreInitializationPolicy policy,
-	ILogger<DataStoreInitializerTask> logger
+	IInitializationState initState,
+	IStartupGate gate,
+	ILogger<AutoInitializeStores> logger
 ) : IStartupTask {
 
 	/// <summary>
@@ -34,7 +34,7 @@ public class DataStoreInitializerTask(
 
 	/// <inheritdoc />
 	public ValueTask ExecuteAsync() {
-		policy.OnReadyToInitialize(this.InitializeStoresAsync);
+		gate.WhenReady(this.InitializeStoresAsync);
 		return ValueTask.CompletedTask;
 	}
 

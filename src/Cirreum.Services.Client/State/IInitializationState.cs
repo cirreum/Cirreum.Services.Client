@@ -1,7 +1,6 @@
-﻿namespace Cirreum.State.DataStores;
-
+﻿namespace Cirreum.State;
 /// <summary>
-/// Tracks the state of data store initialization during application startup.
+/// Tracks the state of initialization during application startup.
 /// </summary>
 /// <remarks>
 /// <para>
@@ -14,7 +13,7 @@
 /// UI updates during the initialization process.
 /// </para>
 /// </remarks>
-public interface IDataStoreInitializationState : IScopedNotificationState {
+public interface IInitializationState : IScopedNotificationState {
 
 	/// <summary>
 	/// Gets a value indicating whether initialization is currently in progress.
@@ -62,7 +61,7 @@ public interface IDataStoreInitializationState : IScopedNotificationState {
 	/// <summary>
 	/// Gets the collection of errors that occurred during initialization.
 	/// </summary>
-	IReadOnlyList<DataStoreInitializationError> Errors { get; }
+	IReadOnlyList<InitializationError> Errors { get; }
 
 	/// <summary>
 	/// Gets a value indicating whether any errors occurred during initialization.

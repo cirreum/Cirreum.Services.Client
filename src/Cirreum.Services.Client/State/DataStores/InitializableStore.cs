@@ -7,7 +7,7 @@
 /// <para>
 /// This class extends <see cref="DataStore"/> with metadata required for startup initialization.
 /// Stores inheriting from this class are automatically discovered and loaded during application
-/// startup by the <see cref="DataStoreInitializerTask"/>.
+/// startup by the <see cref="AutoInitializeStores"/>.
 /// </para>
 /// <para>
 /// The <see cref="DisplayName"/> property provides user-friendly status messages during
@@ -40,7 +40,7 @@
 /// </example>
 /// <seealso cref="DataStore"/>
 /// <seealso cref="IInitializableStore"/>
-/// <seealso cref="DataStoreInitializerTask"/>
+/// <seealso cref="AutoInitializeStores"/>
 public abstract class InitializableStore : DataStore, IInitializableStore {
 
 	/// <inheritdoc />

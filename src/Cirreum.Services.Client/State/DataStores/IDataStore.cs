@@ -26,7 +26,7 @@
 /// </remarks>
 /// <seealso cref="DataStore"/>
 /// <seealso cref="IInitializableStore"/>
-/// <seealso cref="IDataStoreInitializationState"/>
+/// <seealso cref="IInitializationState"/>
 public interface IDataStore : IApplicationState {
 
 	/// <summary>

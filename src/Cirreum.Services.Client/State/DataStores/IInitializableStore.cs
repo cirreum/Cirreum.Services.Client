@@ -6,7 +6,7 @@
 /// <remarks>
 /// <para>
 /// Stores implementing this interface are automatically discovered and initialized
-/// during application startup by the <see cref="DataStoreInitializerTask"/> when
+/// during application startup by the <see cref="AutoInitializeStores"/> when
 /// auto-initialization is enabled via <see cref="DataStoresBuilder.WithAutoInitialization()"/>.
 /// </para>
 /// <para>
@@ -16,8 +16,8 @@
 /// </para>
 /// </remarks>
 /// <seealso cref="InitializableStore"/>
-/// <seealso cref="DataStoreInitializerTask"/>
-/// <seealso cref="IDataStoreInitializationState"/>
+/// <seealso cref="AutoInitializeStores"/>
+/// <seealso cref="IInitializationState"/>
 public interface IInitializableStore : IDataStore {
 	/// <summary>
 	/// Gets the display name associated with the object.

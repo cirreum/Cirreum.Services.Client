@@ -93,7 +93,6 @@ public abstract class DataStore : ScopedNotificationState, IDataStore {
 		} finally {
 			this.IsLoading = false;
 			this.IsRefreshing = false;
-			this.NotifyStateChanged();
 		}
 	}
 
