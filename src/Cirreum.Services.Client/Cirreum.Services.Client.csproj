@@ -18,9 +18,9 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Cirreum.Core" Version="1.0.21" />
-		<PackageReference Include="Cirreum.Startup" Version="1.0.105" />
-		<PackageReference Include="Cirreum.Storage.Browser" Version="1.0.103" />
+		<PackageReference Include="Cirreum.Core" Version="1.0.22" />
+		<PackageReference Include="Cirreum.Startup" Version="1.0.106" />
+		<PackageReference Include="Cirreum.Storage.Browser" Version="1.0.104" />
 	</ItemGroup>
 
 	<!-- No JS/TS Maps or Comments -->
