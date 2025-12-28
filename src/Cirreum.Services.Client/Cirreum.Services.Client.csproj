@@ -18,11 +18,18 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Cirreum.Core" Version="1.0.23" />
 		<PackageReference Include="Cirreum.Startup" Version="1.0.106" />
 		<PackageReference Include="Cirreum.Storage.Browser" Version="1.0.104" />
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(Configuration)'=='Release'">
+		<PackageReference Include="Cirreum.Core" Version="1.0.23" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)'=='Debug'">
+		<ProjectReference Include="..\..\..\..\Core\Cirreum.Core\src\Cirreum.Core\Cirreum.Core.csproj" />
+	</ItemGroup>
+	
 	<!-- No JS/TS Maps or Comments -->
 	<PropertyGroup>
 		<TypeScriptRemoveComments>true</TypeScriptRemoveComments>
