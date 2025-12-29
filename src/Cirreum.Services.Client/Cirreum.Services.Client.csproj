@@ -22,11 +22,11 @@
 		<PackageReference Include="Cirreum.Storage.Browser" Version="1.0.104" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(Configuration)'=='Release'">
+	<ItemGroup Condition="'$(UseLocalComponents)' != 'true'">
 		<PackageReference Include="Cirreum.Core" Version="1.0.23" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(Configuration)'=='Debug'">
+	<ItemGroup Condition="'$(UseLocalComponents)' == 'true'">
 		<ProjectReference Include="..\..\..\..\Core\Cirreum.Core\src\Cirreum.Core\Cirreum.Core.csproj" />
 	</ItemGroup>
 	
