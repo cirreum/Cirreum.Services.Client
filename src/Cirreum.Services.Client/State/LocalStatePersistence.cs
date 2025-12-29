@@ -12,7 +12,7 @@ sealed class LocalStatePersistence(
 ) : ILocalStatePersistence
   , IAutoInitialize {
 
-	private const string containerIdKey = "_corr-348f8115-b981-4783-b5ab-54d36da0d714";
+	private const string containerIdKey = "_cirreum-348f8115-b981-4783-b5ab-54d36da0d714";
 	private string? containerId;
 	private bool _initialized;
 

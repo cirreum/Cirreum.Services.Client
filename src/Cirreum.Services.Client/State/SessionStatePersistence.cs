@@ -12,7 +12,7 @@ sealed class SessionStatePersistence(
 ) : ISessionStatePersistence
   , IAutoInitialize {
 
-	private const string containerIdKey = "_corr-f2d9ac85-a131-4f3c-ab62-c1b94ca8fe0a";
+	private const string containerIdKey = "_cirreum-f2d9ac85-a131-4f3c-ab62-c1b94ca8fe0a";
 	private string? containerId;
 	private bool _initialized;
 
