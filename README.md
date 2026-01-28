@@ -1,3 +1,9 @@
+> [!WARNING]
+> **This repository has been archived and is no longer maintained.**
+>
+> This package has been renamed and moved to [Cirreum.Services.Wasm](https://github.com/cirreum/Cirreum.Services.Wasm).
+> Please use the new package for all future development.
+
 # Cirreum.Services.Client
 
 [![NuGet Version](https://img.shields.io/nuget/v/Cirreum.Services.Client.svg?style=flat-square&labelColor=1F1F1F&color=003D8F)](https://www.nuget.org/packages/Cirreum.Services.Client/)
